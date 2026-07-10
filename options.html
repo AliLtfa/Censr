@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Censr Settings</title>
+  <style>
+    :root {
+      --bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      --card: rgba(255, 255, 255, 0.05);
+      --card2: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.1);
+      --border2: rgba(255, 255, 255, 0.05);
+      --text: #e0e0e0;
+      --text-strong: #ffffff;
+      --muted: #888;
+      --accent: #ff4ec7; /* pink */
+      --accent-2: #ff2ea1;
+      --danger: #f44336;
+      --ok: #4CAF50;
+      --track: #444;
+    }
+    body[data-theme="black"] {
+      --bg: #0b0b0b;
+      --card: rgba(255, 255, 255, 0.04);
+      --card2: rgba(255, 255, 255, 0.02);
+      --border: rgba(255, 255, 255, 0.08);
+      --border2: rgba(255, 255, 255, 0.05);
+      --text: #e8e8e8;
+      --text-strong: #ffffff;
+      --muted: #a0a0a0;
+      --accent: #ff4ec7; /* keep pink accent */
+      --accent-2: #ff2ea1;
+      --danger: #ff4d4d;
+      --ok: #7bd88f;
+      --track: #2b2b2b;
+    }
+
+    body[data-theme="loser"] {
+      --bg: linear-gradient(135deg, #1a0011 0%, #2d0020 50%, #0d000a 100%);
+      --card: rgba(255, 0, 80, 0.06);
+      --card2: rgba(255, 0, 80, 0.03);
+      --border: rgba(255, 0, 100, 0.2);
+      --border2: rgba(255, 0, 100, 0.08);
+      --text: #ff99cc;
+      --text-strong: #ff3399;
+      --muted: #cc6699;
+      --accent: #ff0066;
+      --accent-2: #cc0052;
+      --danger: #ff0044;
+      --ok: #ff3399;
+      --track: #3a0022;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--text);
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+      font-size: 2em;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+    
+    .section {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    
+    .section h2 {
+      margin-top: 0;
+      font-size: 1.2em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border2);
+    }
+    
+    .toggle-row:last-child {
+      border-bottom: none;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--track);
+      transition: .3s;
+      border-radius: 26px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: var(--accent);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+    
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 0;
+    }
+    
+    .slider-row label {
+      min-width: 140px;
+    }
+    
+    .slider-row input[type="range"] {
+      flex: 1;
+      height: 6px;
+      -webkit-appearance: none;
+      background: var(--track);
+      border-radius: 3px;
+      outline: none;
+    }
+    
+    .slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .slider-row .value {
+      min-width: 60px;
+      text-align: right;
+      font-family: monospace;
+      color: var(--accent);
+    }
+    
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 0;
+    }
+    
+    .color-row label {
+      min-width: 140px;
+    }
+    
+    .color-row input[type="color"] {
+      width: 60px;
+      height: 35px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: transparent;
+    }
+    
+    .color-row input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
+    
+    .color-row input[type="color"]::-webkit-color-swatch {
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .color-row .hex-value {
+      font-family: monospace;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    
+    select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0,0,0,0.25);
+      color: var(--text);
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .label-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .label-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      background: var(--card2);
+      border-radius: 6px;
+    }
+    
+    .label-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    
+    .label-item .label-icon {
+      font-size: 18px;
+      width: 26px;
+      text-align: center;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .label-item .label-name {
+      flex: 1;
+      font-size: 12px;
+      color: var(--text);
+    }
+    
+    .label-item.exposed {
+      border-left: 3px solid #ff6b6b;
+    }
+    
+    .label-item.covered {
+      border-left: 3px solid #4ecdc4;
+    }
+    
+    .custom-label-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .custom-label-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px;
+      background: var(--card2);
+      border-radius: 6px;
+    }
+    
+    .custom-label-item label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    
+    .custom-label-item input {
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.2);
+      color: var(--text);
+      font-size: 13px;
+    }
+    
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .image-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .image-item img, .image-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .image-item .delete-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 0, 0, 0.8);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-2);
+    }
+    
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .status {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 1000;
+    }
+    
+    .status.show {
+      opacity: 1;
+    }
+    
+    .status.error {
+      background: var(--danger);
+    }
+    
+    .legend {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+    
+    .legend-color.exposed {
+      background: #ff6b6b;
+    }
+    
+    .legend-color.covered {
+      background: #4ecdc4;
+    }
+    
+    input[type="file"] {
+      display: none;
+    }
+    
+    .file-input-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--accent);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .file-input-label:hover {
+      background: var(--accent-2);
+    }
+    
+    .info-text {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body data-theme="black">
+  <div class="container">
+<h1>
+  <img src="icons/icon48.png" alt="Logo" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 8px; margin-bottom: 4px;"> 
+  Censr Settings
+</h1>
+    <p class="subtitle">Configure how the extension detects and censors content</p>
+    
+    <!-- General Settings -->
+    <div class="section">
+      <h2>⚙️ General Settings</h2>
+      
+      <div class="toggle-row">
+        <label>Extension Enabled</label>
+        <label class="switch">
+          <input type="checkbox" id="enabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="slider-row">
+        <label>Confidence Threshold</label>
+        <input type="range" id="confidence" min="1" max="100" value="25">
+        <span class="value" id="confidenceValue">25%</span>
+      </div>
+      
+      <div class="toggle-row">
+        <label>Censor Style</label>
+        <select id="censorStyle">
+          <optgroup label="Classic">
+            <option value="blur">Blur</option>
+            <option value="heavy-blur">Heavy Blur</option>
+            <option value="pixel">Pixelate</option>
+            <option value="black">Black Bar</option>
+            <option value="white">White Bar</option>
+          </optgroup>
+          <optgroup label="Patterns">
+            <option value="bars">Scanline Bars</option>
+            <option value="diamond">Diamond Grid</option>
+            <option value="noise">TV Static</option>
+            <option value="gradient">Rainbow</option>
+            <option value="spiral">Hypno Spiral</option>
+          </optgroup>
+          <optgroup label="Fun">
+            <option value="sticker">🚫 Stickers</option>
+            <option value="hearts">💕 Hearts</option>
+            <option value="redact">[REDACTED]</option>
+            <option value="glitch">Glitch</option>
+            <option value="invert">Invert</option>
+          </optgroup>
+        </select>
+      </div>
+      
+      <div class="toggle-row">
+        <div>
+          <label>Initial Blur (Pre-scan)</label>
+          <p class="info-text" style="margin: 2px 0 0 0;">Blur images before they're analyzed. Disable for faster page loads.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="initialBlurEnabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    
+    <!-- Display Options -->
+    <div class="section">
+      <h2>🎨 Display Options</h2>
+
+      <div class="toggle-row">
+        <label>Theme</label>
+        <select id="uiTheme">
+          <option value="pink">Pink</option>
+          <option value="black">Black</option>
+          <option value="loser">Loser</option>
+        </select>
+      </div>
+
+      <div class="toggle-row">
+        <label>Hide Labels</label>
+        <label class="switch">
+          <input type="checkbox" id="hideLabels">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="slider-row">
+        <label>Box Size Multiplier</label>
+        <input type="range" id="boxSizeMultiplier" min="1.0" max="3.0" step="0.25" value="1.0">
+        <span class="value" id="boxSizeValue">1.0x</span>
+      </div>
+      
+      <div class="slider-row">
+        <label>Blur Power</label>
+        <input type="range" id="blurPower" min="2" max="30" step="1" value="10">
+        <span class="value" id="blurPowerValue">10</span>
+      </div>
+      <p class="info-text">Higher = more blur. Only applies when using Blur censor style.</p>
+      
+      <h3 style="margin-top: 20px; margin-bottom: 15px; font-size: 14px;">Colors</h3>
+      
+      <div class="color-row">
+        <label>Box Border Color</label>
+        <input type="color" id="boxBorderColor" value="#ff0000">
+        <span class="hex-value" id="boxBorderHex">#ff0000</span>
+      </div>
+      
+      <div class="slider-row">
+        <label>Box Border Opacity</label>
+        <input type="range" id="boxBorderOpacity" min="0" max="1" step="0.1" value="0">
+        <span class="value" id="boxBorderOpacityValue">0%</span>
+      </div>
+      <p class="info-text">0 = invisible borders (clean look). Increase to show colored borders around censored regions.</p>
+      
+      <div class="color-row">
+        <label>Label Background</label>
+        <input type="color" id="labelBgColor" value="#000000">
+        <span class="hex-value" id="labelBgHex">#000000</span>
+      </div>
+      
+      <div class="color-row">
+        <label>Label Text Color</label>
+        <input type="color" id="labelTextColor" value="#ffffff">
+        <span class="hex-value" id="labelTextHex">#ffffff</span>
+      </div>
+    </div>
+    
+    <!-- Video & GIF Settings -->
+    <div class="section">
+      <h2>🎬 Video & GIF Settings</h2>
+      
+      <div class="slider-row">
+        <label>Frame Interval</label>
+        <input type="range" id="frameInterval" min="1" max="500" step="1" value="11">
+        <span class="value" id="frameIntervalValue">11ms</span>
+      </div>
+      <p class="info-text">Lower = smoother but more CPU. Recommended: 10-20ms.</p>
+    </div>
+    
+    <!-- Metronome -->
+    <div class="section">
+      <h2>🎵 Metronome (Detection Sound)</h2>
+      <p class="info-text">Play a tick sound when NSFW content is detected.</p>
+      
+      <div class="toggle-row">
+        <label>Enable Metronome</label>
+        <label class="switch">
+          <input type="checkbox" id="metronomeEnabled">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="slider-row">
+        <label>BPM (Beats/Min)</label>
+        <input type="range" id="metronomeBpm" min="30" max="300" step="1" value="120">
+        <span class="value" id="metronomeBpmValue">120</span>
+      </div>
+      
+      <div class="slider-row">
+        <label>Volume</label>
+        <input type="range" id="metronomeVolume" min="0" max="100" step="1" value="50">
+        <span class="value" id="metronomeVolumeValue">50%</span>
+      </div>
+      
+      <div class="btn-row">
+        <button class="btn btn-secondary" id="testMetronome">🔊 Test Sound</button>
+      </div>
+    </div>
+    
+    <!-- Detection Labels -->
+    <div class="section">
+      <h2>🏷️ Detection Labels</h2>
+      <p>Select which body parts to censor when detected.</p>
+      
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color exposed"></div>
+          <span>Exposed</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color covered"></div>
+          <span>Covered</span>
+        </div>
+      </div>
+      
+      <div class="label-grid" id="labelGrid"></div>
+    </div>
+    
+    <!-- Custom Labels -->
+    <div class="section">
+      <h2>✏️ Custom Labels</h2>
+      
+      <div class="toggle-row">
+        <label>Use Custom Labels</label>
+        <label class="switch">
+          <input type="checkbox" id="useCustomLabels">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <p class="info-text">Enter custom text for each detection type. Use comma-separated values for random selection (e.g., "CENSORED, 🚫, XXX").</p>
+      
+      <div class="custom-label-grid" id="customLabelGrid"></div>
+    </div>
+    
+    <!-- Word Overlay -->
+    <div class="section">
+      <h2>💀 Word Overlay</h2>
+      <p class="info-text">Display bold glitching words over a blurred censored region instead of plain blur/bars.</p>
+      
+      <div class="toggle-row">
+        <label>Enable Word Overlay</label>
+        <label class="switch">
+          <input type="checkbox" id="wordOverlayEnabled">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div style="padding: 10px 0;">
+        <label style="display: block; margin-bottom: 6px;">Words <span style="color: var(--muted); font-size: 12px;">(comma-separated, cycles through them)</span></label>
+        <input type="text" id="wordOverlayWords" placeholder="CENSORED, DENIED, BLOCKED, NO" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); color: var(--text); font-size: 14px;">
+      </div>
+      
+      <div style="padding: 10px 0;">
+        <label style="display: block; margin-bottom: 6px;">Colors <span style="color: var(--muted); font-size: 12px;">(comma-separated hex codes, cycles through them)</span></label>
+        <input type="text" id="wordOverlayColors" placeholder="#ff0000, #9b00ff, #ff00aa, #ff4400" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); color: var(--text); font-size: 14px;">
+      </div>
+
+      <div class="word-overlay-preview" style="margin-top: 12px; padding: 18px; background: rgba(0,0,0,0.5); border-radius: 8px; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,80,0.03) 2px, rgba(255,0,80,0.03) 4px); pointer-events: none;"></div>
+        <span id="wordPreview" style="font: 900 28px Impact, Arial Black, sans-serif; color: #ff0000; text-shadow: 0 0 10px #ff0000;">CENSORED</span>
+      </div>
+      <p class="info-text">Preview of how words will appear. When active, overrides standard censor style.</p>
+    </div>
+    
+    <!-- Image Overlays -->
+    <div class="section">
+      <h2>🖼️ Image Overlays</h2>
+      
+      <div class="toggle-row">
+        <label>Use Image Overlays</label>
+        <label class="switch">
+          <input type="checkbox" id="useImageOverlay">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <p class="info-text">Upload images from your PC to use instead of blur/bars. Supports PNG, JPG, GIF, WebP.</p>
+      
+      <div class="btn-row">
+        <input type="file" id="imageInput" accept="image/*" multiple>
+        <label for="imageInput" class="file-input-label">📁 Add Images</label>
+      </div>
+      
+      <div class="image-grid" id="imageGrid"></div>
+    </div>
+    
+    <!-- Video Overlays -->
+    <div class="section">
+      <h2>🎥 Video Overlays</h2>
+      
+      <div class="toggle-row">
+        <label>Use Video Overlays</label>
+        <label class="switch">
+          <input type="checkbox" id="useVideoOverlay">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <p class="info-text">Upload short video clips (MP4, WebM) to use as animated overlays. Keep files small (&lt;5MB) for best performance.</p>
+      
+      <div class="btn-row">
+        <input type="file" id="videoInput" accept="video/mp4,video/webm" multiple>
+        <label for="videoInput" class="file-input-label">📁 Add Videos</label>
+      </div>
+      
+      <div class="image-grid" id="videoGrid"></div>
+    </div>
+    
+    <!-- Actions -->
+    <div class="section">
+      <h2>💾 Actions</h2>
+      
+      <div class="btn-row">
+        <button class="btn btn-primary" id="saveBtn">Save Settings</button>
+        <button class="btn btn-secondary" id="exportBtn">Export Settings</button>
+        <button class="btn btn-secondary" id="importBtn">Import Settings</button>
+        <input type="file" id="importInput" accept=".json" style="display: none;">
+        <button class="btn btn-danger" id="resetBtn">Reset to Defaults</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="status" id="status"></div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
