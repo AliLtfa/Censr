@@ -11,12 +11,36 @@ computer**. No accounts. No telemetry. No servers. No data collection.
 
 ## Highlights
 
--   🚀 Real-time filtering for images, GIFs, videos, and livestreams
+-   🚀 Real-time filtering for images, GIFs, videos, and livestreams directly in your browser.
 -   🔒 100% client-side (offline capable)
 -   🧠 YOLO-based per-body-part detection
 -   🎛️ Blur, Pixelate, Black Bar, labels, overlays
 -   ⚡ Lightweight and configurable
 -   ❤️ Free for personal use
+
+Censr has also the following features currently (and growing):
+
+✅ Per-body-part detection with 18 toggles.
+
+✅ Custom label text for each detection type 
+
+✅ Adjustable confidence threshold, blur power, box size, and border colors
+
+✅ Smart initial blur — images are blurred before AI processing completes
+
+✅ Works on all websites including social media, search engines, and video platforms
+
+✅ Word Overlay / Glitch Mode — bold, colorful words displayed over glitching blur effects with customizable text and colors.
+
+✅ Custom Image Overlays — upload your own images (PNG, JPG, GIF, WebP) to cover censored areas.
+
+✅ Custom Video Overlays — upload short video clips as animated censoring overlays.
+
+✅ Metronome Detection Sound — audible beat when inappropriate content is detected, with adjustable BPM and volume, for extra safety.
+
+✅ Theme Options — switch between Pink and Black.
+
+
 
 ## Privacy
 
