@@ -64,7 +64,7 @@ A random image from your list will be chosen for each detected region.
 
 ### Firefox
 
-**Note**: This extension currently uses Chrome's Offscreen Documents API which is not available in Firefox. Firefox support may be added in a future version.
+ This extension may be used for FireFox (both mobile and web) by directly downloading it from the extension store.
 
 ## Usage
 
