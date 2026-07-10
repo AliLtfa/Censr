@@ -131,7 +131,7 @@ A random image from your list will be chosen for each detected region.
 
 ## Building from Source
 
-This extension doesn't require a build step - it's plain JavaScript that runs directly in the browser. Just load the folder as an unpacked extension.
+This extension doesn't require a build step - it's plain JavaScript that runs directly in the browser. Just load the folder as an unpacked extension. Use the release versions to load with the icons.
 
 ## Credits
 
