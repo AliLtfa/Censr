@@ -125,7 +125,7 @@ A random image from your list will be chosen for each detected region.
 - Check browser console for errors
 
 **High CPU usage?**
-- The extension processes images one at a time to minimize impact
+- The extension is designed to be extremely lightweight, processeing images one at a time to minimize impact
 - Processing is more intensive on pages with many large images
 - Consider disabling on specific sites if needed
 
