@@ -28,30 +28,7 @@ The extension supports multiple video player types:
 
 ## Custom Labels
 
-You can customize the text displayed on censored regions:
-
-1. Enable "Use custom label text" in settings
-2. Enter a JSON object mapping label names to your custom text:
-
-```json
-{
-  "FEMALE_BREAST_EXPOSED": "CENSORED",
-  "BUTTOCKS_EXPOSED": "🚫",
-  "FEMALE_GENITALIA_EXPOSED": "XXX",
-  "FACE_FEMALE": "👤"
-}
-```
-
-Available labels:
-- FEMALE_GENITALIA_COVERED, FEMALE_GENITALIA_EXPOSED
-- FEMALE_BREAST_COVERED, FEMALE_BREAST_EXPOSED
-- BUTTOCKS_COVERED, BUTTOCKS_EXPOSED
-- ANUS_COVERED, ANUS_EXPOSED
-- MALE_GENITALIA_EXPOSED, MALE_BREAST_EXPOSED
-- BELLY_COVERED, BELLY_EXPOSED
-- FEET_COVERED, FEET_EXPOSED
-- ARMPITS_COVERED, ARMPITS_EXPOSED
-- FACE_FEMALE, FACE_MALE
+You can customize the text displayed on censored regions by enabling "Use custom label text" in settings and entering your desired custom labels for each part.
 
 ## Custom Image Overlays
 
@@ -69,34 +46,10 @@ data:image/png;base64,iVBORw0KGgo...
 A random image from your list will be chosen for each detected region.
 
 **Tips:**
-- Use PNG images with transparency for best results
+- Use PNG images for best results
 - Square images work best (they'll be stretched to fit)
 - You can use data URIs for local images
 
-## Supported Labels
-
-The extension can detect and optionally censor:
-
-**Exposed Content:**
-- Buttocks (Exposed)
-- Female Breast (Exposed)
-- Female Genitalia (Exposed)
-- Male Genitalia (Exposed)
-- Anus (Exposed)
-- Belly (Exposed)
-- Male Breast (Exposed)
-- Feet (Exposed)
-- Armpits (Exposed)
-
-**Covered Content:**
-- Female Genitalia (Covered)
-- Buttocks (Covered)
-- Female Breast (Covered)
-- Anus (Covered)
-- Belly (Covered)
-- Feet (Covered)
-- Armpits (Covered)
-- Face (Male/Female)
 
 ## Installation
 
