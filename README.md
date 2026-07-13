@@ -144,7 +144,7 @@ This extension doesn't require a build step - it's plain JavaScript that runs di
 
 ## License
 
-MIT License - Feel free to modify and distribute.
+ PolyForm Noncommercial License 1.0.0 - Feel free to modify and distribute as long as you do not use it commercially without permission.
 
 ## Disclaimer
 
