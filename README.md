@@ -88,16 +88,16 @@ A random image from your list will be chosen for each detected region.
 ## How It Works
 
 ### Images
-1. When images load, they're immediately blurred as a placeholder
+1. When images load, they're immediately blurred as a placeholder (Can be disabled from settings)
 2. Each image is preprocessed and run through the NudeNet model
 3. Once detection completes, the blur is replaced with precise censoring
 4. Results are cached to avoid re-processing
 
 ### Videos
 1. Videos are monitored for playback events
-2. While playing, frames are captured every 200ms
+2. While playing, frames are captured locally in browser
 3. Each frame is analyzed and censorship is overlaid in real-time
-4. Censorship follows detected regions as they move
+4. Censorship follows detected regions as they move.
 
 ## Technical Details
 
