@@ -1,7 +1,7 @@
 <img width="128" height="128" alt="icon128" src="https://github.com/user-attachments/assets/fa41087e-d774-4f55-8d8e-23ea571adec0" />
 
 
-# Censr - Pirvacy-First Browser Extension
+# Censr - Pirvacy-First Censoring Browser Extension
 
 An AI-powered privacy-first browser extension that automatically detects and censors NSFW content in **images, GIFs, and videos** on any webpage using NudeNet (YOLOv8-based model).
 
