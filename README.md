@@ -1,7 +1,10 @@
 <img width="128" height="128" alt="icon128" src="https://github.com/user-attachments/assets/fa41087e-d774-4f55-8d8e-23ea571adec0" />
 
-
 # Censr - Pirvacy-First Censoring Browser Extension
+
+Grab it from the official Firefox or Chrome extension stores: 
+[Firefox](https://addons.mozilla.org/en-US/firefox/addon/censr/) 
+[Chrome](https://chromewebstore.google.com/detail/censr/pdplabgegppligjlhpohgmnmoeigbipj?authuser=0&hl=en)
 
 An AI-powered privacy-first browser extension that automatically detects and censors NSFW content in **images, GIFs, and videos** on any webpage using NudeNet (YOLOv8-based model).
 
@@ -138,7 +141,6 @@ This extension doesn't require a build step - it's plain JavaScript that runs di
 
 ## Credits
 
-- [NudeNet](https://github.com/notai-tech/nudenet) - NSFW detection model
 - [Hyuto/yolov8-onnxruntime-web](https://github.com/Hyuto/yolov8-onnxruntime-web) - YOLOv8 ONNX web implementation
 - [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) - ML inference engine
 
