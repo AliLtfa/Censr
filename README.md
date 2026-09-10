@@ -3,6 +3,7 @@
 # Censr - Pirvacy-First Censoring Browser Extension
 
 Grab it from the official Firefox or Chrome extension stores: 
+
 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/censr/) 
 
 [Chrome](https://chromewebstore.google.com/detail/censr/pdplabgegppligjlhpohgmnmoeigbipj?authuser=0&hl=en)
