@@ -4,6 +4,7 @@
 
 Grab it from the official Firefox or Chrome extension stores: 
 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/censr/) 
+
 [Chrome](https://chromewebstore.google.com/detail/censr/pdplabgegppligjlhpohgmnmoeigbipj?authuser=0&hl=en)
 
 An AI-powered privacy-first browser extension that automatically detects and censors NSFW content in **images, GIFs, and videos** on any webpage using NudeNet (YOLOv8-based model).
